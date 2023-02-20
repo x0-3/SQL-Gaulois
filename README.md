@@ -1,6 +1,6 @@
 # SQL-Gaulois
 
-### <div align="center">ecrire et exécuter des requêtes SQL et modifiez la base de données</div>  
+### <div align="center">Ecrire et exécuter des requêtes SQL et modifiez la base de données</div>  
 
 ## Langages utiliser  
 <div align="center">  
