@@ -10,7 +10,6 @@ FROM personnage
 INNER JOIN lieu 
 ON personnage.id_lieu = lieu.id_lieu
 GROUP BY nom_lieu
-HAVING COUNT(id_personnage)>1
 ORDER BY nbPerso DESC  
 
 
@@ -33,15 +32,15 @@ ORDER BY nbPerso DESC
 
 
 -- 5. Nom, date et lieu des batailles, classées de la plus récente à la plus ancienne (dates affichées au format jj/mm/aaaa).
-SELECT nom_bataille,DATE_FORMAT(date_bataille, "%d/%m/%Y") AS date ,nom_lieu
+SELECT nom_bataille,DATE_FORMAT(date_bataille, "%d/%m/-%Y") AS date ,nom_lieu
 FROM bataille
 INNER JOIN lieu 
 ON bataille.id_lieu = lieu.id_lieu
-ORDER BY YEAR(date_bataille) DESC   
+ORDER BY YEAR(date_bataille) ASC, MONTH(date_bataille) DESC, DAY(date_bataille) DESC
 
 
 -- 6. Nom des potions + coût de réalisation de la potion (trié par coût décroissant).
-SELECT nom_potion, SUM(cout_ingredient)AS prix
+SELECT nom_potion, SUM(cout_ingredient*qte)AS prix
 FROM ((composer  
 INNER JOIN potion ON potion.id_potion = composer.id_potion)
 INNER JOIN ingredient ON ingredient.id_ingredient = composer.id_ingredient)
